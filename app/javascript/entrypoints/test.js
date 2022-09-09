@@ -1,3 +1,6 @@
+import { createApp } from "vue";
+import Test from "../components/Test.vue";
+
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("mounted!!!!");
+  createApp(Test).mount("#test");
 });
