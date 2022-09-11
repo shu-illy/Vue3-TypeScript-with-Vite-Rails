@@ -1,6 +1,6 @@
 import { createApp } from "vue";
-import Test from "../components/Test.vue";
+import Tweet from "../components/Tweet.vue";
 
 document.addEventListener("DOMContentLoaded", () => {
-  createApp(Test).mount("#test");
+  createApp(Tweet).mount("#test");
 });
