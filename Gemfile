@@ -29,6 +29,7 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 gem 'vite_rails'
+gem 'annotate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
