@@ -30,6 +30,8 @@ gem 'net-imap'
 gem 'net-pop'
 gem 'vite_rails'
 gem 'annotate'
+gem 'jsonapi-serializer'
+gem 'pry-byebug'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

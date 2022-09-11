@@ -6,6 +6,8 @@ module Api
       # GET /tweets or /tweets.json
       def index
         @tweets = Tweet.all
+        json_string = TweetSerializer.new(@tweets).serializable_hash.to_json
+        render json: json_string
       end
     
       # POST /tweets or /tweets.json
