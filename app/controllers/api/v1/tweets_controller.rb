@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TweetsController < ApplicationController
+    class TweetsController < Api::V1::BaseApiController
       before_action :set_tweet, only: %i[ show edit update destroy ]
     
       # GET /tweets or /tweets.json
@@ -14,14 +14,11 @@ module Api
       def create
         @tweet = Tweet.new(tweet_params)
     
-        respond_to do |format|
-          if @tweet.save
-            format.html { redirect_to tweet_url(@tweet), notice: "Tweet was successfully created." }
-            format.json { render :show, status: :created, location: @tweet }
-          else
-            format.html { render :new, status: :unprocessable_entity }
-            format.json { render json: @tweet.errors, status: :unprocessable_entity }
-          end
+        if @tweet.save
+          json_string = TweetSerializer.new(@tweet).serializable_hash.to_json
+          render json: json_string
+        else
+          format.json { render json: @tweet.errors, status: :unprocessable_entity }
         end
       end
     
@@ -43,7 +40,7 @@ module Api
     
         # Only allow a list of trusted parameters through.
         def tweet_params
-          params.fetch(:tweet, {})
+          params.require(:tweet).permit(:content)
         end
     end
   end
