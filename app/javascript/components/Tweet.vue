@@ -4,20 +4,38 @@ import TweetPostForm from "./TweetPostForm.vue";
 import TweetList from "./TweetList.vue";
 
 // refを使うことでリアクティブな値にする
-const tweets = ref([
-  { id: 0, description: "Hello, world" },
-  { id: 1, description: "Second tweet" },
-]);
+const tweets = ref([]);
 
 const inputtingDescription = ref<string>("");
 
-const postTweet = (description: string) => {
-  const tweet = { id: Math.random(), description };
-  tweets.value.push(tweet);
+const fetchTweets = async () => {
+  const result = await fetch("api/v1/tweets");
+  const jsonData = await result.json();
+  const data = jsonData.data.map((element) => ({
+    id: Number(element.id),
+    content: element.attributes.content,
+  }));
+  tweets.value = data;
+};
+fetchTweets();
+
+const postTweet = async (content: string) => {
+  // const result = await fetch("api/v1/tweets", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     content: content,
+  //   }),
+  // });
+  // console.log(result);
+  // const jsonData = await result.json();
+  // console.log(jsonData);
 };
 
 const deleteTweet = (id: number) => {
-  tweets.value = tweets.value.filter((t) => t.id !== id);
+  // tweets.value = tweets.value.filter((t) => t.id !== id);
 };
 </script>
 

@@ -3,7 +3,7 @@ import { defineProps } from "vue";
 
 type Tweet = {
   id: number;
-  description: string;
+  content: string;
 };
 
 type Props = {
@@ -20,7 +20,7 @@ defineProps<Props>();
 
 <template>
   <li v-for="tweet in tweets" v-bind:key="tweet.id" class="tweet-list">
-    <span>{{ tweet.description }}</span>
+    <span>{{ tweet.content }}</span>
     <button @click="deleteTweet(tweet.id)" class="delete-button">delete</button>
   </li>
 </template>
